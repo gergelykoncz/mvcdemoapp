@@ -1,0 +1,42 @@
+﻿@model IEnumerable<MyFirstMvcApp.Models.UserModel>
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>User List</h2>
+<a class="btn btn-default" href="@Url.Action("AddUser")">Add New User</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>User name</th>
+            <th>Email</th>
+            <th>Age</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var user in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(user.Id.ToString(), 
+                   "GetUser", new { userId = user.Id })
+                </td>
+                <td>@user.UserName</td>
+                <td>@user.Email</td>
+                <td>@user.Age</td>
+                <td>
+                    <a class="btn"
+                       href="@Url.Action("EditUser", new { userId = user.Id })">
+                        Edit User
+                    </a>
+
+                    <a class="btn btn-danger"
+                       href="@Url.Action("DeleteUser", new { userId = user.Id })">
+                    Delete User</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
